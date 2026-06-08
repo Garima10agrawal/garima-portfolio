@@ -286,7 +286,6 @@ function SketchBackground() {
     <div className="sketch-bg" aria-hidden="true">
       <motion.span className="sketch star-a" animate={{ rotate: [0, 360] }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }}>✦</motion.span>
       <motion.span className="sketch bridge" animate={{ y: [0, -14, 0] }} transition={{ duration: 7, repeat: Infinity }}>⌒⌒⌒</motion.span>
-      <motion.span className="sketch cup" animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 4, repeat: Infinity }}>☕</motion.span>
       <motion.span className="sketch opera" animate={{ x: [0, 18, 0] }} transition={{ duration: 8, repeat: Infinity }}>△△△</motion.span>
       <motion.div className="line-doodle opera-house" animate={{ y: [0, -10, 0] }} transition={{ duration: 8, repeat: Infinity }}>
         <OperaHouseDoodle />
