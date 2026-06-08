@@ -71,6 +71,14 @@ a { color: inherit; }
   mask-image: linear-gradient(to bottom, transparent, black 12%, black 78%, transparent);
 }
 
+.aussie-play-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
 .sketch {
   position: absolute;
   color: rgba(255, 242, 230, 0.24);
@@ -95,6 +103,47 @@ a { color: inherit; }
 
 .orb.mint { right: 7%; top: 34%; background: var(--mint); }
 .orb.peach { left: 6%; top: 14%; background: var(--peach); }
+
+.play-ball {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: clamp(28px, 4vw, 58px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, var(--cream) 0 10%, transparent 11%),
+    conic-gradient(from 30deg, var(--mint) 0 28%, var(--peach) 28% 54%, var(--burnt) 54% 78%, var(--mint) 78%);
+  opacity: 0.58;
+  filter: drop-shadow(0 0 22px rgba(105, 220, 158, 0.18));
+}
+
+.kangaroo-doodle {
+  position: absolute;
+  width: clamp(110px, 14vw, 190px);
+  opacity: 0.18;
+  color: var(--peach);
+  filter: drop-shadow(0 0 16px rgba(229, 159, 113, 0.14));
+}
+
+.roo-one {
+  top: 56%;
+}
+
+.roo-two {
+  top: 22%;
+  color: var(--mint);
+  transform: scaleX(-1);
+}
+
+.kangaroo-doodle svg {
+  width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
 .topbar {
   position: fixed;
@@ -296,10 +345,8 @@ h3 {
   width: 100%;
   display: block;
   object-fit: cover;
-  border-radius: 999px 999px 44px 44px;
-  border-left: 1px solid rgba(229, 159, 113, 0.75);
-  border-right: 1px solid rgba(105, 220, 158, 0.72);
-  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.42);
+  border-radius: 0;
+  filter: drop-shadow(0 34px 54px rgba(0, 0, 0, 0.38));
 }
 
 .winking::after {
@@ -335,7 +382,7 @@ h3 {
 }
 
 .avatar-pop img {
-  border-radius: 120px 120px 28px 28px;
+  filter: drop-shadow(0 30px 48px rgba(0, 0, 0, 0.36));
 }
 
 .chapter-copy {
@@ -399,7 +446,7 @@ h3 {
 }
 
 .twirl-avatar img {
-  border-radius: 999px;
+  filter: drop-shadow(0 28px 44px rgba(0, 0, 0, 0.34));
 }
 
 .section-head {

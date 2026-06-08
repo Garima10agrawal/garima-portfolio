@@ -12,11 +12,11 @@ import {
   Sparkles
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import avatarHero from "./assets/avatar-hero-wave.png";
-import avatarAbout from "./assets/avatar-about.png";
-import avatarWorkTwirl from "./assets/avatar-work-twirl.png";
-import avatarSkills from "./assets/avatar-skills.png";
-import avatarFooter from "./assets/avatar-footer-phone-coffee.png";
+import avatarHero from "./assets/avatar-hero-wave-transparent.png";
+import avatarAbout from "./assets/avatar-about-transparent.png";
+import avatarWorkTwirl from "./assets/avatar-work-twirl-transparent.png";
+import avatarSkills from "./assets/avatar-skills-transparent.png";
+import avatarFooter from "./assets/avatar-footer-phone-coffee-transparent.png";
 import "./styles.css";
 
 const navItems = ["Home", "About", "Work", "Connect"];
@@ -81,6 +81,7 @@ function App() {
       <div className="side-line left" />
       <div className="side-line right" />
       <SketchBackground />
+      <AussiePlayLayer />
       <Header />
       <main>
         <Hero />
@@ -290,6 +291,42 @@ function SketchBackground() {
       <motion.span className="orb mint" animate={{ x: [0, 40, -20, 0], y: [0, -24, 20, 0] }} transition={{ duration: 11, repeat: Infinity }} />
       <motion.span className="orb peach" animate={{ x: [0, -28, 22, 0], y: [0, 26, -18, 0] }} transition={{ duration: 12, repeat: Infinity }} />
     </div>
+  );
+}
+
+function AussiePlayLayer() {
+  const { scrollYProgress } = useScroll();
+  const ballX = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ["8vw", "68vw", "28vw", "76vw"]);
+  const ballY = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ["82vh", "22vh", "68vh", "34vh"]);
+  const ballRotate = useTransform(scrollYProgress, [0, 1], [0, 920]);
+  const rooOneX = useTransform(scrollYProgress, [0, 0.45, 1], ["4vw", "20vw", "8vw"]);
+  const rooTwoX = useTransform(scrollYProgress, [0, 0.55, 1], ["78vw", "58vw", "72vw"]);
+
+  return (
+    <div className="aussie-play-layer" aria-hidden="true">
+      <motion.div className="play-ball" style={{ x: ballX, y: ballY, rotate: ballRotate }} />
+      <motion.div className="kangaroo-doodle roo-one" style={{ x: rooOneX }}>
+        <KangarooDoodle />
+      </motion.div>
+      <motion.div className="kangaroo-doodle roo-two" style={{ x: rooTwoX }}>
+        <KangarooDoodle />
+      </motion.div>
+    </div>
+  );
+}
+
+function KangarooDoodle() {
+  return (
+    <svg viewBox="0 0 140 120" role="img" aria-label="">
+      <path d="M86 26c15 1 26 12 28 27 2 14-4 25-16 31" />
+      <path d="M82 27c-9 8-15 18-15 31 0 18 12 29 29 27" />
+      <path d="M105 29l16-18M110 34l23-10" />
+      <path d="M66 61c-21 8-36 21-45 40" />
+      <path d="M73 82l-13 28M94 85l11 25" />
+      <path d="M65 58c-17-5-29-14-38-27" />
+      <circle cx="99" cy="43" r="2.5" />
+      <path d="M91 52c5 4 11 4 16 0" />
+    </svg>
   );
 }
 
