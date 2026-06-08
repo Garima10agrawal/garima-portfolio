@@ -569,6 +569,19 @@ h3 {
   width: min(220px, 42vw);
 }
 
+.smoke-avatar::before {
+  content: "";
+  position: absolute;
+  inset: 16% 6% 8%;
+  z-index: -1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, rgba(105, 220, 158, 0.22), transparent 62%),
+    radial-gradient(circle at 70% 28%, rgba(229, 159, 113, 0.18), transparent 45%);
+  filter: blur(18px);
+  animation: smokeFloat 4.5s ease-in-out infinite;
+}
+
 .capabilities .section-head,
 .accordion {
   grid-column: 2;
@@ -628,19 +641,20 @@ h3 {
 }
 
 .mini-avatar {
-  width: min(190px, 46vw);
-  margin-bottom: -18px;
+  width: min(210px, 46vw);
+  margin-bottom: 1rem;
   z-index: 1;
 }
 
 .more-toggle {
   width: max-content;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1.35rem;
   padding: 0.72rem 1rem;
   color: var(--black);
   background: var(--mint);
   border-radius: 999px;
   font-weight: 950;
+  box-shadow: 0 16px 42px rgba(105, 220, 158, 0.14);
 }
 
 .tool-cloud {
@@ -766,6 +780,11 @@ h3 {
   0%, 100% { translate: 0 0; rotate: -1deg; }
   45% { translate: 0 -12px; rotate: 2deg; }
   70% { translate: 8px 2px; rotate: -2deg; }
+}
+
+@keyframes smokeFloat {
+  0%, 100% { transform: translateY(0) scale(0.95); opacity: 0.82; }
+  50% { transform: translateY(-14px) scale(1.08); opacity: 1; }
 }
 
 @keyframes marquee {

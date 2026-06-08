@@ -211,7 +211,7 @@ function Capabilities() {
 
   return (
     <section className="chapter capabilities">
-      <motion.div className="smoke-avatar" initial={{ opacity: 1, scale: 1 }} whileInView={{ opacity: 0, scale: 0.45, y: -80, filter: "blur(12px)" }} viewport={{ once: false, amount: 0.4 }}>
+      <motion.div className="smoke-avatar" initial={{ opacity: 0, scale: 0.86, y: 42 }} whileInView={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }} transition={{ duration: 0.75, ease: "easeOut" }} viewport={{ once: false, amount: 0.35 }}>
         <AvatarImage src={avatarSkills} />
       </motion.div>
       <div className="section-head">
