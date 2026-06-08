@@ -12,7 +12,11 @@ import {
   Sparkles
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import garimaAvatar from "./assets/garima-cartoon-avatar.png";
+import avatarHero from "./assets/avatar-hero-wave.png";
+import avatarAbout from "./assets/avatar-about.png";
+import avatarWorkTwirl from "./assets/avatar-work-twirl.png";
+import avatarSkills from "./assets/avatar-skills.png";
+import avatarFooter from "./assets/avatar-footer-phone-coffee.png";
 import "./styles.css";
 
 const navItems = ["Home", "About", "Work", "Connect"];
@@ -129,8 +133,7 @@ function Hero() {
         </motion.div>
       </motion.div>
       <motion.div className="hero-avatar waving winking" style={{ scale: avatarScale, y: avatarY }}>
-        <AvatarImage />
-        <span className="wave-hand" />
+        <AvatarImage src={avatarHero} />
       </motion.div>
       <a className="scroll-cue" href="#about"><ArrowDown size={18} /> Scroll</a>
     </section>
@@ -141,9 +144,7 @@ function About() {
   return (
     <section className="chapter about" id="about">
       <motion.div className="avatar-pop open-arms" initial={{ opacity: 0, x: -90, scale: 0.75 }} whileInView={{ opacity: 1, x: 0, scale: 1 }} viewport={{ once: false, amount: 0.45 }}>
-        <AvatarImage />
-        <span className="arm left-arm" />
-        <span className="arm right-arm" />
+        <AvatarImage src={avatarAbout} />
       </motion.div>
       <motion.div className="chapter-copy" initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false, amount: 0.4 }}>
         <p className="kicker">About</p>
@@ -178,7 +179,7 @@ function Work() {
   return (
     <section className="chapter work" id="work">
       <motion.div className="twirl-avatar" initial={{ opacity: 0, x: "-40vw", rotate: -90 }} whileInView={{ opacity: 1, x: "38vw", rotate: 360 }} transition={{ duration: 1.1, ease: "easeInOut" }} viewport={{ once: false, amount: 0.35 }}>
-        <AvatarImage />
+        <AvatarImage src={avatarWorkTwirl} />
       </motion.div>
       <div className="section-head">
         <p className="kicker">Work</p>
@@ -207,7 +208,7 @@ function Capabilities() {
   return (
     <section className="chapter capabilities">
       <motion.div className="smoke-avatar" initial={{ opacity: 1, scale: 1 }} whileInView={{ opacity: 0, scale: 0.45, y: -80, filter: "blur(12px)" }} viewport={{ once: false, amount: 0.4 }}>
-        <AvatarImage />
+        <AvatarImage src={avatarSkills} />
       </motion.div>
       <div className="section-head">
         <p className="kicker">What I can do for you</p>
@@ -237,7 +238,7 @@ function Tools() {
   return (
     <section className="tools-section">
       <motion.div className="mini-avatar" initial={{ opacity: 0, y: 80 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.3 }}>
-        <AvatarImage />
+        <AvatarImage src={avatarSkills} />
       </motion.div>
       <div className="more-toggle">More about me</div>
       <h2>Tools I can bring to the table.</h2>
@@ -267,7 +268,7 @@ function Connect() {
           </div>
         </div>
         <div className="footer-avatar">
-          <AvatarImage />
+          <AvatarImage src={avatarFooter} />
           <Coffee className="coffee-cup" size={44} />
         </div>
       </motion.div>
@@ -275,8 +276,8 @@ function Connect() {
   );
 }
 
-function AvatarImage() {
-  return <img src={garimaAvatar} alt="Cartoon portrait of Garima Agrawal" />;
+function AvatarImage({ src }) {
+  return <img src={src} alt="Cartoon portrait of Garima Agrawal" />;
 }
 
 function SketchBackground() {
