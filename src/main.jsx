@@ -1,8 +1,10 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import {
+  ArrowDown,
   ArrowUpRight,
-  BriefcaseBusiness,
+  ChevronDown,
+  Coffee,
   Download,
   Mail,
   MapPin,
@@ -13,215 +15,185 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import garimaAvatar from "./assets/garima-cartoon-avatar.png";
 import "./styles.css";
 
-const bubbleMotion = {
-  hidden: { opacity: 0, y: 34, scale: 0.94 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } }
-};
+const navItems = ["Home", "About", "Work", "Connect"];
 
-const sections = [
+const work = [
   {
-    id: "about",
-    label: "About",
-    title: "I turn messy business questions into calm, useful decisions.",
-    copy: "Sydney-based Business Analyst with a UNSW analytics background, engineering foundation and consulting delivery mindset.",
-    chips: ["Requirements", "Dashboards", "Stakeholders", "Strategy"]
+    initials: "CH",
+    label: "Product Analytics",
+    title: "Contoso Hotel",
+    desc: "Sentiment dashboard linking guest feedback to NPS and revenue uplift.",
+    tools: "Power BI, KPIs, ETL, stakeholder reporting",
+    data: "Reviews, surveys, bookings, service tickets"
   },
   {
-    id: "work",
-    label: "Work",
-    title: "Selected case studies with business shape, not just pretty slides.",
-    copy: "Product analytics, market entry, BNPL uplift and PMO control tower projects built for recruiter scanning.",
-    chips: ["Contoso Hotel", "Senoptix", "ZipPay", "PMO"]
+    initials: "SX",
+    label: "Consulting",
+    title: "Senoptix",
+    desc: "Market entry roadmap, pricing tiers and $5-15M revenue scenarios.",
+    tools: "Market research, interviews, financial modelling",
+    data: "12 interviews, channel economics, scenarios"
   },
   {
-    id: "experience",
-    label: "Experience",
-    title: "Analytics, PMO and consulting projects across tech, energy and services.",
-    copy: "Project Management Intern at Innomate/UXT, Software Developer Intern at KData, and consulting project lead for Senoptix and Equoia.",
-    chips: ["Asana", "Power BI", "SQL", "Miro"]
+    initials: "ZP",
+    label: "Business Analysis",
+    title: "ZipPay BNPL",
+    desc: "Inclusive onboarding, user stories and customer trust controls.",
+    tools: "Miro, user stories, prototypes, business case",
+    data: "3 regions, funnel assumptions, segment insights"
   },
   {
-    id: "connect",
-    label: "Connect",
-    title: "Open to Business Analyst, Product Analyst, PMO and consulting roles.",
-    copy: "Based in Sydney with Australian work rights. Happy to discuss analyst, graduate and digital transformation opportunities.",
-    chips: ["Sydney", "Open to roles", "Resume ready", "LinkedIn"]
+    initials: "PM",
+    label: "PMO",
+    title: "Delivery Control Tower",
+    desc: "Portfolio visibility, SOPs and delivery governance rhythm.",
+    tools: "Asana, Everhour, SOPs, RAG reporting",
+    data: "Milestones, time logs, risks, delivery updates"
   }
 ];
 
-const workCards = [
-  ["Product Analytics", "Contoso Hotel", "Sentiment dashboard for NPS, repeat bookings and revenue uplift."],
-  ["Consulting", "Senoptix", "Market entry, pricing tiers and $5-15M revenue scenarios."],
-  ["Business Analysis", "ZipPay BNPL", "Inclusive onboarding, user stories and customer trust controls."],
-  ["PMO", "Control Tower", "Portfolio visibility, SOPs and delivery governance rhythm."]
+const journey = [
+  ["2026", "Project Management Intern", "Innomate/UXT | PMO updates, lifecycle docs, Asana and Everhour."],
+  ["2025", "Master of Commerce", "UNSW | Business Analytics & Digital Transformation."],
+  ["2025", "Consulting Project Lead", "Senoptix + Equoia | market entry, interviews and financial models."],
+  ["2024", "Sydney Experience", "Camp Australia | communication, leadership and stakeholder empathy."],
+  ["2022", "Software Developer Intern", "KData | 60% faster SME financial reporting."],
+  ["2023", "B.Tech Engineering", "Manipal University Jaipur | computer and communication engineering."]
 ];
 
-function App() {
-  const [active, setActive] = React.useState("about");
-  const activeSection = sections.find((section) => section.id === active) ?? sections[0];
+const capabilities = [
+  ["Business analysis", "Requirements, user stories, acceptance criteria, process maps and practical documentation that delivery teams can actually use."],
+  ["Product analytics", "KPI design, dashboard thinking, customer insights and business-ready recommendations from messy data."],
+  ["Consulting strategy", "Market research, stakeholder interviews, commercial modelling and concise executive narratives."],
+  ["PMO support", "Portfolio visibility, SOPs, time tracking, milestone updates and escalation clarity."],
+  ["Data storytelling", "Power BI, SQL, Excel and clear reporting packs that help non-technical stakeholders decide faster."]
+];
 
+const tools = ["Power BI", "SQL", "Python", "Advanced Excel", "Tableau", "SAS", "Asana", "Everhour", "Miro", "Jira", "Trello", "Notion", "Google Colab", "API integration"];
+
+function App() {
   return (
     <div className="site-shell">
-      <div className="side-line left" aria-hidden="true" />
-      <div className="side-line right" aria-hidden="true" />
-      <AnimatedBackground />
-      <Header active={active} setActive={setActive} />
+      <div className="side-line left" />
+      <div className="side-line right" />
+      <SketchBackground />
+      <Header />
       <main>
-        <Hero setActive={setActive} />
-        <BubbleSwitcher active={active} setActive={setActive} />
-        <Spotlight section={activeSection} />
-        <WorkWall />
-        <Experience />
+        <Hero />
+        <About />
+        <Work />
+        <Capabilities />
+        <Tools />
         <Connect />
       </main>
     </div>
   );
 }
 
-function Header({ active, setActive }) {
+function Header() {
   return (
-    <header className="header">
-      <a className="logo" href="#home" onClick={() => setActive("about")}>
-        <span>GA</span>
-        <strong>Garima Agrawal</strong>
-      </a>
-      <nav aria-label="Portfolio sections">
-        {sections.map((section) => (
-          <a
-            key={section.id}
-            href={`#${section.id}`}
-            className={active === section.id ? "active" : ""}
-            onClick={() => setActive(section.id)}
-          >
-            {section.label}
-          </a>
+    <header className="topbar">
+      <a className="logo" href="#home">GA</a>
+      <nav aria-label="Main navigation">
+        {navItems.map((item) => (
+          <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>
         ))}
       </nav>
+      <a className="available" href="#connect">
+        <span /> Available to work
+      </a>
     </header>
   );
 }
 
-function Hero({ setActive }) {
+function Hero() {
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
-  const avatarScale = useTransform(scrollYProgress, [0, 0.55, 1], [0.92, 1.08, 0.9]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const avatarScale = useTransform(scrollYProgress, [0, 0.55, 1], [1, 1.28, 0.72]);
+  const avatarY = useTransform(scrollYProgress, [0, 0.7, 1], [0, 120, 280]);
+  const textScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
 
   return (
     <section className="hero" id="home" ref={ref}>
-      <motion.div className="hero-inner" style={{ scale: heroScale, y }}>
-        <motion.p className="hello" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          Hey, welcome to my portfolio
-        </motion.p>
-        <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.08 }}>
-          I’m Garima, a Business Analyst & Consultant.
+      <motion.div className="hero-copy" style={{ scale: textScale }}>
+        <motion.p className="kicker" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>Hey, welcome to my portfolio</motion.p>
+        <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+          Garima Agrawal
         </motion.h1>
-        <motion.p className="tiny-intro" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.35 }}>
-          Sydney-based. Data fluent. Strategy-minded. PMO-ready.
+        <motion.p className="role" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.28 }}>
+          Business Analyst & Consultant
         </motion.p>
-        <motion.div className="hero-actions" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}>
-          <a className="pill primary" href="#work" onClick={() => setActive("work")}>
-            See work <ArrowUpRight size={18} />
-          </a>
-          <a className="pill outline" href="/Garima_Agrawal_Resume.pdf" download>
-            <Download size={18} /> Resume
-          </a>
+        <motion.div className="hero-tags" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+          <span><MapPin size={16} /> Based in Sydney</span>
+          <span><Sparkles size={16} /> Available to work</span>
         </motion.div>
       </motion.div>
-      <motion.div className="avatar-stage" style={{ scale: avatarScale }}>
-        <CartoonAvatar />
+      <motion.div className="hero-avatar waving winking" style={{ scale: avatarScale, y: avatarY }}>
+        <AvatarImage />
+        <span className="wave-hand" />
       </motion.div>
+      <a className="scroll-cue" href="#about"><ArrowDown size={18} /> Scroll</a>
     </section>
   );
 }
 
-function AnimatedBackground() {
+function About() {
   return (
-    <div className="animated-bg" aria-hidden="true">
-      <motion.span className="orb peach" animate={{ x: [0, 32, -18, 0], y: [0, -28, 22, 0], scale: [1, 1.08, 0.95, 1] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
-      <motion.span className="orb green" animate={{ x: [0, -26, 20, 0], y: [0, 24, -18, 0], scale: [0.9, 1.1, 1, 0.9] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} />
-      <motion.span className="star one" animate={{ rotate: [0, 360], scale: [1, 1.25, 1] }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }}>✦</motion.span>
-      <motion.span className="star two" animate={{ y: [0, -18, 0], opacity: [0.3, 1, 0.3] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>✧</motion.span>
+    <section className="chapter about" id="about">
+      <motion.div className="avatar-pop open-arms" initial={{ opacity: 0, x: -90, scale: 0.75 }} whileInView={{ opacity: 1, x: 0, scale: 1 }} viewport={{ once: false, amount: 0.45 }}>
+        <AvatarImage />
+        <span className="arm left-arm" />
+        <span className="arm right-arm" />
+      </motion.div>
+      <motion.div className="chapter-copy" initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false, amount: 0.4 }}>
+        <p className="kicker">About</p>
+        <h2>“I translate ambiguity into useful decisions.”</h2>
+        <p>
+          A Sydney-based analyst with engineering roots, analytics training and a consulting mindset. I like clean requirements, calm dashboards and work that makes teams feel clear.
+        </p>
+      </motion.div>
+      <Journey />
+    </section>
+  );
+}
+
+function Journey() {
+  return (
+    <div className="journey">
+      <p className="kicker">Journey</p>
+      <div className="journey-line">
+        {journey.map(([year, title, text]) => (
+          <motion.article key={`${year}-${title}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}>
+            <span>{year}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </motion.article>
+        ))}
+      </div>
     </div>
   );
 }
 
-function CartoonAvatar() {
+function Work() {
   return (
-    <motion.div className="cartoon-card" initial={{ opacity: 0, rotate: -4, y: 26 }} animate={{ opacity: 1, rotate: 0, y: 0 }} transition={{ duration: 0.85, delay: 0.3 }}>
-      <div className="avatar-burst" />
-      <img src={garimaAvatar} alt="Cartoon portrait of Garima Agrawal" />
-      <p>Business analyst energy, Sydney edition.</p>
-    </motion.div>
-  );
-}
-
-function BubbleSwitcher({ active, setActive }) {
-  return (
-    <section className="bubble-nav" aria-label="Choose a portfolio section">
-      {sections.map((section, index) => (
-        <motion.a
-          key={section.id}
-          href={`#${section.id}`}
-          className={active === section.id ? "bubble active" : "bubble"}
-          onClick={() => setActive(section.id)}
-          initial={{ opacity: 0, y: 18, scale: 0.9 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          whileHover={{ scale: 1.08, rotate: index % 2 ? -1.5 : 1.5 }}
-          whileTap={{ scale: 0.96 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, delay: index * 0.05 }}
-        >
-          {section.label}
-        </motion.a>
-      ))}
-    </section>
-  );
-}
-
-function Spotlight({ section }) {
-  return (
-    <motion.section
-      key={section.id}
-      id={section.id}
-      className="spotlight"
-      initial={{ opacity: 0, scale: 0.96, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <p className="section-label">{section.label}</p>
-      <h2>{section.title}</h2>
-      <p>{section.copy}</p>
-      <div className="chip-row">
-        {section.chips.map((chip) => <span key={chip}>{chip}</span>)}
-      </div>
-    </motion.section>
-  );
-}
-
-function WorkWall() {
-  return (
-    <section className="work-wall" id="work">
-      <div className="section-top">
-        <p className="section-label">Work</p>
-        <h2>Small cards. Big business context.</h2>
+    <section className="chapter work" id="work">
+      <motion.div className="twirl-avatar" initial={{ opacity: 0, x: "-40vw", rotate: -90 }} whileInView={{ opacity: 1, x: "38vw", rotate: 360 }} transition={{ duration: 1.1, ease: "easeInOut" }} viewport={{ once: false, amount: 0.35 }}>
+        <AvatarImage />
+      </motion.div>
+      <div className="section-head">
+        <p className="kicker">Work</p>
+        <h2>Case studies with a little business sparkle.</h2>
       </div>
       <div className="work-grid">
-        {workCards.map(([type, title, text], index) => (
-          <motion.article
-            className="work-card"
-            key={title}
-            variants={bubbleMotion}
-            initial="hidden"
-            whileInView="show"
-            whileHover={{ scale: 1.04, y: -8 }}
-            viewport={{ once: true, amount: 0.22 }}
-            transition={{ delay: index * 0.05 }}
-          >
-            <span>{type}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
+        {work.map((item, index) => (
+          <motion.article className="work-card" key={item.title} initial={{ opacity: 0, scale: 0.9, y: 24 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} whileHover={{ y: -10, scale: 1.03 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: index * 0.06 }}>
+            <div className="project-initials">{item.initials}</div>
+            <span>{item.label}</span>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+            <small><strong>Tools:</strong> {item.tools}</small>
+            <small><strong>Data:</strong> {item.data}</small>
+            <a href="/Garima_Agrawal_Resume.pdf" download>View project <ArrowUpRight size={15} /></a>
           </motion.article>
         ))}
       </div>
@@ -229,21 +201,48 @@ function WorkWall() {
   );
 }
 
-function Experience() {
+function Capabilities() {
+  const [open, setOpen] = React.useState("Business analysis");
+
   return (
-    <section className="experience" id="experience">
-      <p className="section-label">Experience</p>
-      <div className="experience-list">
-        {[
-          ["Innomate/UXT", "PMO updates, Asana, Everhour, SOPs."],
-          ["KData Science", "60% faster reporting for SME finance data."],
-          ["Senoptix & Equoia", "Market entry, interviews, modelling, roadmap."]
-        ].map(([title, text]) => (
-          <motion.div className="experience-row" key={title} initial={{ opacity: 0, x: -22 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ x: 12 }} viewport={{ once: true }}>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </motion.div>
-        ))}
+    <section className="chapter capabilities">
+      <motion.div className="smoke-avatar" initial={{ opacity: 1, scale: 1 }} whileInView={{ opacity: 0, scale: 0.45, y: -80, filter: "blur(12px)" }} viewport={{ once: false, amount: 0.4 }}>
+        <AvatarImage />
+      </motion.div>
+      <div className="section-head">
+        <p className="kicker">What I can do for you</p>
+        <h2>Pick a skill. I’ll unpack it.</h2>
+      </div>
+      <div className="accordion">
+        {capabilities.map(([title, text]) => {
+          const isOpen = open === title;
+          return (
+            <article className={isOpen ? "capability open" : "capability"} key={title}>
+              <button type="button" onClick={() => setOpen(isOpen ? "" : title)}>
+                <span>{title}</span>
+                <ChevronDown size={22} />
+              </button>
+              <motion.p initial={false} animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}>
+                {text}
+              </motion.p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function Tools() {
+  return (
+    <section className="tools-section">
+      <motion.div className="mini-avatar" initial={{ opacity: 0, y: 80 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false, amount: 0.3 }}>
+        <AvatarImage />
+      </motion.div>
+      <div className="more-toggle">More about me</div>
+      <h2>Tools I can bring to the table.</h2>
+      <div className="tool-cloud">
+        {tools.map((tool) => <span key={tool}>{tool}</span>)}
       </div>
     </section>
   );
@@ -251,19 +250,45 @@ function Experience() {
 
 function Connect() {
   return (
-    <section className="connect" id="connect">
-      <motion.div className="connect-bubble" initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.65 }}>
-        <Sparkles size={24} />
-        <h2>Let’s build something useful.</h2>
-        <p>Open to Sydney Business Analyst, Product Analyst, PMO and consulting roles.</p>
-        <div className="contact-links">
-          <a href="mailto:garima10agrawal@gmail.com"><Mail size={17} /> Email</a>
-          <a href="tel:+61435683356"><Phone size={17} /> Call</a>
-          <a href="https://linkedin.com/in/garima-10ag2001"><BriefcaseBusiness size={17} /> LinkedIn</a>
-          <span><MapPin size={17} /> Sydney</span>
+    <footer className="connect" id="connect">
+      <div className="marquee" aria-hidden="true">
+        <span>CONTACT ME • LET’S CHAT • CONNECT • COFFEE? •</span>
+        <span>CONTACT ME • LET’S CHAT • CONNECT • COFFEE? •</span>
+      </div>
+      <motion.div className="phone-scene" initial={{ opacity: 0, scale: 0.86 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.35 }}>
+        <div className="phone-card">
+          <span className="phone-speaker" />
+          <h2>Let’s chat & connect</h2>
+          <p>Business Analyst | Sydney | Available to work</p>
+          <div className="footer-links">
+            <a href="mailto:garima10agrawal@gmail.com"><Mail size={17} /> Email</a>
+            <a href="https://linkedin.com/in/garima-10ag2001"><Phone size={17} /> LinkedIn</a>
+            <a href="/Garima_Agrawal_Resume.pdf" download><Download size={17} /> Resume</a>
+          </div>
+        </div>
+        <div className="footer-avatar">
+          <AvatarImage />
+          <Coffee className="coffee-cup" size={44} />
         </div>
       </motion.div>
-    </section>
+    </footer>
+  );
+}
+
+function AvatarImage() {
+  return <img src={garimaAvatar} alt="Cartoon portrait of Garima Agrawal" />;
+}
+
+function SketchBackground() {
+  return (
+    <div className="sketch-bg" aria-hidden="true">
+      <motion.span className="sketch star-a" animate={{ rotate: [0, 360] }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }}>✦</motion.span>
+      <motion.span className="sketch bridge" animate={{ y: [0, -14, 0] }} transition={{ duration: 7, repeat: Infinity }}>⌒⌒⌒</motion.span>
+      <motion.span className="sketch cup" animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 4, repeat: Infinity }}>☕</motion.span>
+      <motion.span className="sketch opera" animate={{ x: [0, 18, 0] }} transition={{ duration: 8, repeat: Infinity }}>△△△</motion.span>
+      <motion.span className="orb mint" animate={{ x: [0, 40, -20, 0], y: [0, -24, 20, 0] }} transition={{ duration: 11, repeat: Infinity }} />
+      <motion.span className="orb peach" animate={{ x: [0, -28, 22, 0], y: [0, 26, -18, 0] }} transition={{ duration: 12, repeat: Infinity }} />
+    </div>
   );
 }
 
