@@ -288,6 +288,24 @@ function SketchBackground() {
       <motion.span className="sketch bridge" animate={{ y: [0, -14, 0] }} transition={{ duration: 7, repeat: Infinity }}>⌒⌒⌒</motion.span>
       <motion.span className="sketch cup" animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 4, repeat: Infinity }}>☕</motion.span>
       <motion.span className="sketch opera" animate={{ x: [0, 18, 0] }} transition={{ duration: 8, repeat: Infinity }}>△△△</motion.span>
+      <motion.div className="line-doodle opera-house" animate={{ y: [0, -10, 0] }} transition={{ duration: 8, repeat: Infinity }}>
+        <OperaHouseDoodle />
+      </motion.div>
+      <motion.div className="line-doodle harbour-bridge" animate={{ x: [0, 14, 0] }} transition={{ duration: 9, repeat: Infinity }}>
+        <HarbourBridgeDoodle />
+      </motion.div>
+      <motion.div className="line-doodle donut-doodle" animate={{ rotate: [-4, 5, -4] }} transition={{ duration: 6, repeat: Infinity }}>
+        <DonutDoodle />
+      </motion.div>
+      <motion.div className="line-doodle coffee-doodle" animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity }}>
+        <CoffeeCupDoodle />
+      </motion.div>
+      <motion.div className="line-doodle kangaroo-doodle-bg" animate={{ x: [0, 10, 0] }} transition={{ duration: 7, repeat: Infinity }}>
+        <KangarooDoodle />
+      </motion.div>
+      <motion.div className="line-doodle koala-doodle" animate={{ rotate: [-2, 2, -2] }} transition={{ duration: 7, repeat: Infinity }}>
+        <KoalaDoodle />
+      </motion.div>
       <motion.span className="orb mint" animate={{ x: [0, 40, -20, 0], y: [0, -24, 20, 0] }} transition={{ duration: 11, repeat: Infinity }} />
       <motion.span className="orb peach" animate={{ x: [0, -28, 22, 0], y: [0, 26, -18, 0] }} transition={{ duration: 12, repeat: Infinity }} />
     </div>
@@ -325,6 +343,80 @@ function CatDoodle() {
       <circle cx="57" cy="61" r="2.8" />
       <circle cx="84" cy="61" r="2.8" />
       <path d="M67 72h8M52 77c-10 0-18 2-28 8M88 77c10 0 18 2 28 8M53 84c-9 3-17 7-25 13M87 84c9 3 17 7 25 13" />
+    </svg>
+  );
+}
+
+function OperaHouseDoodle() {
+  return (
+    <svg viewBox="0 0 180 120">
+      <path d="M16 94h148" />
+      <path d="M32 88c16-34 34-55 60-70-5 28-16 52-34 70" />
+      <path d="M72 88c14-31 31-51 55-62-2 26-13 47-31 62" />
+      <path d="M107 88c13-21 28-34 48-41-4 18-13 32-27 41" />
+      <path d="M24 101h132" />
+    </svg>
+  );
+}
+
+function HarbourBridgeDoodle() {
+  return (
+    <svg viewBox="0 0 220 120">
+      <path d="M15 88h190" />
+      <path d="M24 88c38-55 134-55 172 0" />
+      <path d="M48 88V66M76 88V48M104 88V38M132 88V40M160 88V52M188 88V70" />
+      <path d="M44 88 84 54 126 88 164 55 198 88" />
+    </svg>
+  );
+}
+
+function CoffeeCupDoodle() {
+  return (
+    <svg viewBox="0 0 120 120">
+      <path d="M34 44h46l-7 45H42L34 44Z" />
+      <path d="M39 34h36" />
+      <path d="M82 53c17 0 17 26 0 26" />
+      <path d="M44 26c-7-8 8-12 1-20M63 26c-7-8 8-12 1-20" />
+    </svg>
+  );
+}
+
+function DonutDoodle() {
+  return (
+    <svg viewBox="0 0 120 120">
+      <circle cx="60" cy="60" r="38" />
+      <circle cx="60" cy="60" r="14" />
+      <path d="M37 46c10-9 20 6 30-1s20-4 27 4" />
+      <path d="M42 79c7 5 15-3 22 2s17 5 24-2" />
+      <path d="M35 62h8M81 41h8M75 84h8" />
+    </svg>
+  );
+}
+
+function KangarooDoodle() {
+  return (
+    <svg viewBox="0 0 140 120">
+      <path d="M86 26c15 1 26 12 28 27 2 14-4 25-16 31" />
+      <path d="M82 27c-9 8-15 18-15 31 0 18 12 29 29 27" />
+      <path d="M105 29l16-18M110 34l23-10" />
+      <path d="M66 61c-21 8-36 21-45 40" />
+      <path d="M73 82l-13 28M94 85l11 25" />
+      <path d="M65 58c-17-5-29-14-38-27" />
+      <circle cx="99" cy="43" r="2.5" />
+    </svg>
+  );
+}
+
+function KoalaDoodle() {
+  return (
+    <svg viewBox="0 0 130 120">
+      <circle cx="38" cy="42" r="20" />
+      <circle cx="92" cy="42" r="20" />
+      <path d="M35 52c0-22 14-38 30-38s30 16 30 38c0 25-13 42-30 42S35 77 35 52Z" />
+      <circle cx="54" cy="52" r="2.5" />
+      <circle cx="76" cy="52" r="2.5" />
+      <path d="M62 60c4-4 8-4 12 0-1 6-3 9-6 9s-5-3-6-9Z" />
+      <path d="M53 77c8 7 22 7 30 0" />
     </svg>
   );
 }

@@ -92,6 +92,62 @@ a { color: inherit; }
 .cup { right: 12%; bottom: 19%; color: rgba(229, 159, 113, 0.38); }
 .opera { right: 14%; top: 48%; color: rgba(255, 242, 230, 0.2); letter-spacing: -0.12em; }
 
+.line-doodle {
+  position: absolute;
+  width: clamp(82px, 10vw, 170px);
+  color: rgba(255, 242, 230, 0.15);
+  opacity: 0.58;
+  filter: drop-shadow(0 0 18px rgba(105, 220, 158, 0.08));
+}
+
+.line-doodle svg {
+  width: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.opera-house {
+  left: 6%;
+  top: 34%;
+  color: rgba(255, 242, 230, 0.13);
+}
+
+.harbour-bridge {
+  right: 5%;
+  top: 61%;
+  width: clamp(120px, 16vw, 260px);
+  color: rgba(105, 220, 158, 0.15);
+}
+
+.donut-doodle {
+  right: 18%;
+  top: 31%;
+  color: rgba(229, 159, 113, 0.18);
+}
+
+.coffee-doodle {
+  left: 16%;
+  top: 76%;
+  color: rgba(229, 159, 113, 0.17);
+}
+
+.kangaroo-doodle-bg {
+  left: 4%;
+  top: 66%;
+  width: clamp(90px, 11vw, 180px);
+  color: rgba(229, 159, 113, 0.12);
+}
+
+.koala-doodle {
+  right: 18%;
+  top: 9%;
+  width: clamp(82px, 9vw, 150px);
+  color: rgba(255, 242, 230, 0.12);
+}
+
 .orb {
   position: absolute;
   width: clamp(170px, 28vw, 420px);
