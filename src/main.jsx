@@ -12,6 +12,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Balancer from "react-wrap-balancer";
 import avatarHero from "./assets/avatar-hero-wave-transparent.png";
 import avatarAbout from "./assets/avatar-about-transparent.png";
 import avatarWorkTwirl from "./assets/avatar-work-twirl-transparent.png";
@@ -76,6 +77,8 @@ const capabilities = [
 const tools = ["Power BI", "SQL", "Python", "Advanced Excel", "Tableau", "SAS", "Asana", "Everhour", "Miro", "Jira", "Trello", "Notion", "Google Colab", "API integration"];
 
 function App() {
+  useBallAwareLayout();
+
   return (
     <div className="site-shell">
       <div className="side-line left" />
@@ -147,11 +150,11 @@ function About() {
       <motion.div className="avatar-pop open-arms" initial={{ opacity: 0, x: -90, scale: 0.75 }} whileInView={{ opacity: 1, x: 0, scale: 1 }} viewport={{ once: false, amount: 0.45 }}>
         <AvatarImage src={avatarAbout} />
       </motion.div>
-      <motion.div className="chapter-copy" initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false, amount: 0.4 }}>
+      <motion.div className="chapter-copy ball-aware" data-ball-aware initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false, amount: 0.4 }}>
         <p className="kicker">About</p>
-        <h2>“I translate ambiguity into useful decisions.”</h2>
+        <h2><Balancer>“I translate ambiguity into useful decisions.”</Balancer></h2>
         <p>
-          A Sydney-based analyst with engineering roots, analytics training and a consulting mindset. I like clean requirements, calm dashboards and work that makes teams feel clear.
+          <Balancer>A Sydney-based analyst with engineering roots, analytics training and a consulting mindset. I like clean requirements, calm dashboards and work that makes teams feel clear.</Balancer>
         </p>
       </motion.div>
       <Journey />
@@ -165,7 +168,7 @@ function Journey() {
       <p className="kicker">Journey</p>
       <div className="journey-line">
         {journey.map(([year, title, text]) => (
-          <motion.article key={`${year}-${title}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}>
+          <motion.article className="ball-aware" data-ball-aware key={`${year}-${title}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}>
             <span>{year}</span>
             <h3>{title}</h3>
             <p>{text}</p>
@@ -184,11 +187,11 @@ function Work() {
       </motion.div>
       <div className="section-head">
         <p className="kicker">Work</p>
-        <h2>Case studies with a little business sparkle.</h2>
+        <h2 className="ball-aware" data-ball-aware><Balancer>Case studies with a little business sparkle.</Balancer></h2>
       </div>
       <div className="work-grid">
         {work.map((item, index) => (
-          <motion.article className="work-card" key={item.title} initial={{ opacity: 0, scale: 0.9, y: 24 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} whileHover={{ y: -10, scale: 1.03 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: index * 0.06 }}>
+          <motion.article className="work-card ball-aware" data-ball-aware key={item.title} initial={{ opacity: 0, scale: 0.9, y: 24 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} whileHover={{ y: -10, scale: 1.03 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: index * 0.06 }}>
             <div className="project-initials">{item.initials}</div>
             <span>{item.label}</span>
             <h3>{item.title}</h3>
@@ -213,13 +216,13 @@ function Capabilities() {
       </motion.div>
       <div className="section-head">
         <p className="kicker">What I can do for you</p>
-        <h2>Pick a skill. I’ll unpack it.</h2>
+        <h2 className="ball-aware" data-ball-aware><Balancer>Pick a skill. I’ll unpack it.</Balancer></h2>
       </div>
       <div className="accordion">
         {capabilities.map(([title, text]) => {
           const isOpen = open === title;
           return (
-            <article className={isOpen ? "capability open" : "capability"} key={title}>
+            <article className={isOpen ? "capability open ball-aware" : "capability ball-aware"} data-ball-aware key={title}>
               <button type="button" onClick={() => setOpen(isOpen ? "" : title)}>
                 <span>{title}</span>
                 <ChevronDown size={22} />
@@ -242,7 +245,7 @@ function Tools() {
         <AvatarImage src={avatarSkills} />
       </motion.div>
       <div className="more-toggle">More about me</div>
-      <h2>Tools I can bring to the table.</h2>
+      <h2 className="ball-aware" data-ball-aware><Balancer>Tools I can bring to the table.</Balancer></h2>
       <div className="tool-cloud">
         {tools.map((tool) => <span key={tool}>{tool}</span>)}
       </div>
@@ -299,35 +302,73 @@ function AussiePlayLayer() {
   const ballX = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ["8vw", "68vw", "28vw", "76vw"]);
   const ballY = useTransform(scrollYProgress, [0, 0.35, 0.7, 1], ["82vh", "22vh", "68vh", "34vh"]);
   const ballRotate = useTransform(scrollYProgress, [0, 1], [0, 920]);
-  const rooOneX = useTransform(scrollYProgress, [0, 0.45, 1], ["4vw", "20vw", "8vw"]);
-  const rooTwoX = useTransform(scrollYProgress, [0, 0.55, 1], ["78vw", "58vw", "72vw"]);
+  const catOneX = useTransform(scrollYProgress, [0, 0.45, 1], ["4vw", "20vw", "8vw"]);
+  const catTwoX = useTransform(scrollYProgress, [0, 0.55, 1], ["78vw", "58vw", "72vw"]);
 
   return (
     <div className="aussie-play-layer" aria-hidden="true">
       <motion.div className="play-ball" style={{ x: ballX, y: ballY, rotate: ballRotate }} />
-      <motion.div className="kangaroo-doodle roo-one" style={{ x: rooOneX }}>
-        <KangarooDoodle />
+      <motion.div className="cat-doodle cat-one" style={{ x: catOneX }}>
+        <CatDoodle />
       </motion.div>
-      <motion.div className="kangaroo-doodle roo-two" style={{ x: rooTwoX }}>
-        <KangarooDoodle />
+      <motion.div className="cat-doodle cat-two" style={{ x: catTwoX }}>
+        <CatDoodle />
       </motion.div>
     </div>
   );
 }
 
-function KangarooDoodle() {
+function CatDoodle() {
   return (
     <svg viewBox="0 0 140 120" role="img" aria-label="">
-      <path d="M86 26c15 1 26 12 28 27 2 14-4 25-16 31" />
-      <path d="M82 27c-9 8-15 18-15 31 0 18 12 29 29 27" />
-      <path d="M105 29l16-18M110 34l23-10" />
-      <path d="M66 61c-21 8-36 21-45 40" />
-      <path d="M73 82l-13 28M94 85l11 25" />
-      <path d="M65 58c-17-5-29-14-38-27" />
-      <circle cx="99" cy="43" r="2.5" />
-      <path d="M91 52c5 4 11 4 16 0" />
+      <path d="M39 50 32 28l20 11M88 39l20-11-7 23" />
+      <path d="M38 49c5-18 20-28 38-26 20 2 34 17 34 38 0 25-18 43-44 43-23 0-39-15-39-36 0-8 3-15 11-19Z" />
+      <path d="M93 70c18-2 32 7 34 23 2 12-5 22-17 24" />
+      <path d="M45 86c-8 8-16 15-26 20M68 95v20M89 90l13 22" />
+      <circle cx="57" cy="61" r="2.8" />
+      <circle cx="84" cy="61" r="2.8" />
+      <path d="M67 72h8M52 77c-10 0-18 2-28 8M88 77c10 0 18 2 28 8M53 84c-9 3-17 7-25 13M87 84c9 3 17 7 25 13" />
     </svg>
   );
+}
+
+function useBallAwareLayout() {
+  React.useEffect(() => {
+    let frame = 0;
+
+    const overlaps = (a, b) => (
+      a.left < b.right &&
+      a.right > b.left &&
+      a.top < b.bottom &&
+      a.bottom > b.top
+    );
+
+    const update = () => {
+      const ball = document.querySelector(".play-ball");
+      const targets = document.querySelectorAll("[data-ball-aware]");
+
+      if (ball) {
+        const ballRect = ball.getBoundingClientRect();
+
+        targets.forEach((target) => {
+          const rect = target.getBoundingClientRect();
+          const paddedRect = {
+            left: rect.left - 20,
+            right: rect.right + 20,
+            top: rect.top - 20,
+            bottom: rect.bottom + 20
+          };
+
+          target.classList.toggle("ball-near", overlaps(ballRect, paddedRect));
+        });
+      }
+
+      frame = requestAnimationFrame(update);
+    };
+
+    frame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(frame);
+  }, []);
 }
 
 createRoot(document.getElementById("root")).render(<App />);

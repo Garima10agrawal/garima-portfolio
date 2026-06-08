@@ -74,7 +74,7 @@ a { color: inherit; }
 .aussie-play-layer {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 6;
   pointer-events: none;
   overflow: hidden;
 }
@@ -116,33 +116,76 @@ a { color: inherit; }
     conic-gradient(from 30deg, var(--mint) 0 28%, var(--peach) 28% 54%, var(--burnt) 54% 78%, var(--mint) 78%);
   opacity: 0.58;
   filter: drop-shadow(0 0 22px rgba(105, 220, 158, 0.18));
+  mix-blend-mode: screen;
 }
 
-.kangaroo-doodle {
+.cat-doodle {
   position: absolute;
   width: clamp(110px, 14vw, 190px);
-  opacity: 0.18;
+  opacity: 0.2;
   color: var(--peach);
   filter: drop-shadow(0 0 16px rgba(229, 159, 113, 0.14));
 }
 
-.roo-one {
+.cat-one {
   top: 56%;
+  animation: catPounce 4.4s ease-in-out infinite;
 }
 
-.roo-two {
+.cat-two {
   top: 22%;
   color: var(--mint);
   transform: scaleX(-1);
+  animation: catPounce 5.2s ease-in-out infinite reverse;
 }
 
-.kangaroo-doodle svg {
+.cat-doodle svg {
   width: 100%;
   fill: none;
   stroke: currentColor;
   stroke-width: 5;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.ball-aware {
+  position: relative;
+  transform-origin: center;
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease,
+    filter 220ms ease,
+    border-radius 220ms ease,
+    padding 220ms ease,
+    max-width 220ms ease;
+  text-wrap: balance;
+}
+
+.ball-aware.ball-near {
+  transform: translateX(clamp(-18px, -1.6vw, -8px)) scale(0.94);
+  opacity: 0.82;
+  filter: saturate(0.92);
+}
+
+.ball-aware.ball-near::after {
+  content: "";
+  position: absolute;
+  inset: -0.35rem;
+  z-index: -1;
+  border-radius: inherit;
+  background: radial-gradient(circle at 88% 18%, rgba(105, 220, 158, 0.12), transparent 42%);
+  opacity: 0.9;
+}
+
+.work-card.ball-near,
+.journey article.ball-near,
+.capability.ball-near {
+  border-radius: 46px;
+  background: rgba(12, 12, 12, 0.44);
+}
+
+h2.ball-near {
+  max-width: 86%;
 }
 
 .topbar {
@@ -717,6 +760,12 @@ h3 {
 @keyframes pulse {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.55); opacity: 0.55; }
+}
+
+@keyframes catPounce {
+  0%, 100% { translate: 0 0; rotate: -1deg; }
+  45% { translate: 0 -12px; rotate: 2deg; }
+  70% { translate: 8px 2px; rotate: -2deg; }
 }
 
 @keyframes marquee {
