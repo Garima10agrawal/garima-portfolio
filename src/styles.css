@@ -112,11 +112,13 @@ a { color: inherit; }
   aspect-ratio: 1;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 28%, var(--cream) 0 10%, transparent 11%),
-    conic-gradient(from 30deg, var(--mint) 0 28%, var(--peach) 28% 54%, var(--burnt) 54% 78%, var(--mint) 78%);
-  opacity: 0.58;
-  filter: drop-shadow(0 0 22px rgba(105, 220, 158, 0.18));
-  mix-blend-mode: screen;
+    radial-gradient(circle at 30% 25%, #fff2e6 0 9%, transparent 10%),
+    radial-gradient(circle at 68% 72%, rgba(12, 12, 12, 0.3) 0 14%, transparent 15%),
+    conic-gradient(from 26deg, #ff3b30 0 34%, #ba1f16 34% 58%, #e59f71 58% 70%, #ff3b30 70%);
+  opacity: 0.92;
+  filter:
+    drop-shadow(0 0 12px rgba(255, 59, 48, 0.58))
+    drop-shadow(0 0 28px rgba(186, 31, 22, 0.36));
 }
 
 .cat-doodle {
