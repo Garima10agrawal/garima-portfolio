@@ -12,7 +12,6 @@ import {
   Sparkles
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Balancer from "react-wrap-balancer";
 import avatarHero from "./assets/avatar-hero-wave-transparent.png";
 import avatarAbout from "./assets/avatar-about-transparent.png";
 import avatarWorkTwirl from "./assets/avatar-work-twirl-transparent.png";
@@ -77,8 +76,6 @@ const capabilities = [
 const tools = ["Power BI", "SQL", "Python", "Advanced Excel", "Tableau", "SAS", "Asana", "Everhour", "Miro", "Jira", "Trello", "Notion", "Google Colab", "API integration"];
 
 function App() {
-  useBallAwareLayout();
-
   return (
     <div className="site-shell">
       <div className="side-line left" />
@@ -150,11 +147,11 @@ function About() {
       <motion.div className="avatar-pop open-arms" initial={{ opacity: 0, x: -90, scale: 0.75 }} whileInView={{ opacity: 1, x: 0, scale: 1 }} viewport={{ once: false, amount: 0.45 }}>
         <AvatarImage src={avatarAbout} />
       </motion.div>
-      <motion.div className="chapter-copy ball-aware" data-ball-aware initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false, amount: 0.4 }}>
+      <motion.div className="chapter-copy" initial={{ opacity: 0, scale: 0.92 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: false, amount: 0.4 }}>
         <p className="kicker">About</p>
-        <h2><Balancer>“I translate ambiguity into useful decisions.”</Balancer></h2>
+        <h2>“I translate ambiguity into useful decisions.”</h2>
         <p>
-          <Balancer>A Sydney-based analyst with engineering roots, analytics training and a consulting mindset. I like clean requirements, calm dashboards and work that makes teams feel clear.</Balancer>
+          A Sydney-based analyst with engineering roots, analytics training and a consulting mindset. I like clean requirements, calm dashboards and work that makes teams feel clear.
         </p>
       </motion.div>
       <Journey />
@@ -168,7 +165,7 @@ function Journey() {
       <p className="kicker">Journey</p>
       <div className="journey-line">
         {journey.map(([year, title, text]) => (
-          <motion.article className="ball-aware" data-ball-aware key={`${year}-${title}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}>
+          <motion.article key={`${year}-${title}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.4 }}>
             <span>{year}</span>
             <h3>{title}</h3>
             <p>{text}</p>
@@ -187,11 +184,11 @@ function Work() {
       </motion.div>
       <div className="section-head">
         <p className="kicker">Work</p>
-        <h2 className="ball-aware" data-ball-aware><Balancer>Case studies with a little business sparkle.</Balancer></h2>
+        <h2>Case studies with a little business sparkle.</h2>
       </div>
       <div className="work-grid">
         {work.map((item, index) => (
-          <motion.article className="work-card ball-aware" data-ball-aware key={item.title} initial={{ opacity: 0, scale: 0.9, y: 24 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} whileHover={{ y: -10, scale: 1.03 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: index * 0.06 }}>
+          <motion.article className="work-card" key={item.title} initial={{ opacity: 0, scale: 0.9, y: 24 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} whileHover={{ y: -10, scale: 1.03 }} viewport={{ once: true, amount: 0.25 }} transition={{ delay: index * 0.06 }}>
             <div className="project-initials">{item.initials}</div>
             <span>{item.label}</span>
             <h3>{item.title}</h3>
@@ -216,13 +213,13 @@ function Capabilities() {
       </motion.div>
       <div className="section-head">
         <p className="kicker">What I can do for you</p>
-        <h2 className="ball-aware" data-ball-aware><Balancer>Pick a skill. I’ll unpack it.</Balancer></h2>
+        <h2>Pick a skill. I’ll unpack it.</h2>
       </div>
       <div className="accordion">
         {capabilities.map(([title, text]) => {
           const isOpen = open === title;
           return (
-            <article className={isOpen ? "capability open ball-aware" : "capability ball-aware"} data-ball-aware key={title}>
+            <article className={isOpen ? "capability open" : "capability"} key={title}>
               <button type="button" onClick={() => setOpen(isOpen ? "" : title)}>
                 <span>{title}</span>
                 <ChevronDown size={22} />
@@ -245,7 +242,7 @@ function Tools() {
         <AvatarImage src={avatarSkills} />
       </motion.div>
       <div className="more-toggle">More about me</div>
-      <h2 className="ball-aware" data-ball-aware><Balancer>Tools I can bring to the table.</Balancer></h2>
+      <h2>Tools I can bring to the table.</h2>
       <div className="tool-cloud">
         {tools.map((tool) => <span key={tool}>{tool}</span>)}
       </div>
@@ -330,45 +327,6 @@ function CatDoodle() {
       <path d="M67 72h8M52 77c-10 0-18 2-28 8M88 77c10 0 18 2 28 8M53 84c-9 3-17 7-25 13M87 84c9 3 17 7 25 13" />
     </svg>
   );
-}
-
-function useBallAwareLayout() {
-  React.useEffect(() => {
-    let frame = 0;
-
-    const overlaps = (a, b) => (
-      a.left < b.right &&
-      a.right > b.left &&
-      a.top < b.bottom &&
-      a.bottom > b.top
-    );
-
-    const update = () => {
-      const ball = document.querySelector(".play-ball");
-      const targets = document.querySelectorAll("[data-ball-aware]");
-
-      if (ball) {
-        const ballRect = ball.getBoundingClientRect();
-
-        targets.forEach((target) => {
-          const rect = target.getBoundingClientRect();
-          const paddedRect = {
-            left: rect.left - 20,
-            right: rect.right + 20,
-            top: rect.top - 20,
-            bottom: rect.bottom + 20
-          };
-
-          target.classList.toggle("ball-near", overlaps(ballRect, paddedRect));
-        });
-      }
-
-      frame = requestAnimationFrame(update);
-    };
-
-    frame = requestAnimationFrame(update);
-    return () => cancelAnimationFrame(frame);
-  }, []);
 }
 
 createRoot(document.getElementById("root")).render(<App />);
